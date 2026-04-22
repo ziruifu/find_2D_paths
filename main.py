@@ -3,7 +3,13 @@ import imageio.v3 as imageio
 import numpy as np
 from pathlib import Path
 
-from path_solver import analyze_universe, find_path_between_points, find_random_paths, find_two_disjoint_paths
+from path_solver import (
+    analyze_universe,
+    diagnose_two_path_request,
+    find_path_between_points,
+    find_random_paths,
+    find_two_disjoint_paths,
+)
 
 
 OUTPUT_DIR = Path("2D_paths_output")
@@ -194,6 +200,15 @@ def solve_double(universe, image_path, pair1, pair2, args):
         black_threshold=args.black_threshold,
     )
     if result is None:
+        diagnosis = diagnose_two_path_request(
+            universe,
+            pair1,
+            pair2,
+            allow_diagonal=args.allow_diagonal,
+            black_threshold=args.black_threshold,
+        )
+        if diagnosis is not None:
+            print(diagnosis)
         print("No valid pair of different paths was found for the two point pairs.")
         return 1
 

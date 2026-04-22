@@ -114,6 +114,9 @@ Generally, the double path solving:
 2. All pixels used by the first path is temporally banned from the second path
 3. Everytime the second path is expanded by BFS, check if it is still valid; restart new path anytime when it is not valid (overlap with the first path or cannot reach end point).
 
+**This algorithm actuallh has a huge loop-hole. I found that when trying to set two pairs of start/end points that would probably lead to two crossing path, it will stuck forever to converge.**
+**Solved: Add a error message to two paths that are inevitably crossing.**
+
 ### 4. Random Path Solving
 
 Just generate multiple paths according to Single Path Solving rules, but with random start and end points.
